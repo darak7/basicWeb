@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+< lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listas HTML</title>
+</head>
+<hr>
+    <h1>Ejemplos de Listas en HTML</h1>
+
+    <h2>Mis frutas favoritas</h2>
+    <ul>
+        <li>Manzanas</li>
+        <li>Bananas</li>
+        <li>Cerezas</li>
+    </ul>
+    <h2>Pasos para hacer un café</h2>
+    <ul>
+        <li>Hervir el agua</li>
+        <li>Agregar café</li>
+        <li><a href="https://www.google.com" target="_blank">Revolver y servir</a></li>
+    </ul>
+    <h2>Mis sitios favoritos </h2>
+    <a href="https://www.google.com" target="_blank">Visitar Google</a>
+    <br></br>
+    <a href="https://www.youtube.com/watch?v=LNSqKB_SS9Y&t=1s" target="_blank">Visitar YouTube</a>
+    <br></br>
+<!-- es un comentario -->
+    <h2>Opción 1</h2>
+    <p>Texto 1.</p>
+<ul class="lista-columnas-1" aria-label="Lista de dos columnas">
+        <li>Elemento 1</li>
+        <li>Elemento 2
+            <ul class="lista-columnas-2">
+                <li>Sub-elemento 2.1</li>
+                <li>Sub-elemento 2.2</li>
+            </ul>
+        </li>
+        <li>Elemento C</li>
+    <li>Elemento 1</li>
+        <li>Elemento 2
+            <ul list-style-type="square">
+                <li>Sub-elemento 2.1</li>
+                <li>Sub-elemento 2.2</li>
+            </ul>
+        </li>
+        <li>Elemento 3</li>
+    </ul>
+
+    <h2>Lista ordenada</h2>
+    <ol type="I">
+        <li>Paso 1</li>
+        <li>Paso 2
+            <ol>
+                <li>Sub-paso 2.1</li>
+                <li>Sub-paso 2.2</li>
+            </ol>
+        </li>
+        <li>Paso 3</li>
+    </ol>
+
+    <h2>Lista de definición</h2>
+    <dl>
+        <dt>Término 1</dt>
+        <dd>Definición del término 1.</dd>
+        <dt>Término 2</dt>
+        <dd>Definición del término 2.</dd>
+    </dl>   
+    <dt>Notas para definiciones:</dt>
+    <dd>Este es un ejemplo de una lista de definición.</dd>  
+    <hr>
+
+    <h2>Ejemplo tabla simple</h2>
+    <table border="1">
+        <caption>Lista de estudiantes</caption>
+        <thead>     
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Programa</th>
+            </tr>
+        </thead>
+        <tbody>                 
+            <tr>
+                <td>1</td>
+                <td>Steven Aguirre</td>
+                <td>Desarrollo de Software</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Maria Gomez</td>
+                <td>Ingeniería de Sistemas</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Carlos Perez</td>
+                <td>Medicina</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3">Total estudiantes: 3</td>
+            </tr>
+    </table>    
+    <br>
+    <hr>
+        <select name="operacion" id="operacion" multiple>
+      <option value="suma">suma</option>
+      <option value="resta">resta</option>
+      <option value="multiplicacion">multiplicación</option>
+      <option value="division">división</option>
+    </select>
+    <hr></hr>
+    <select name="pais" id="pais" disabled>
+      <option value="colombia">colombia</option>
+      <option value="mexico">mexico</option>
+      <option value="USA">USA</option>
+      <option value="canada">canada</option>
+    </select>
+    <hr></hr>
+    <select name="sexo" id="pais" size="2">
+      <option value="hombre">hombre</option>
+      <option value="mujer">mujer</option>
+      <option value="prefiero no decirlo">prefiero no decirlo</option>
+    </select>
+    <hr></hr>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/LNSqKB_SS9Y?si=NFEkTXtzyqWsG_L3"  title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+    </iframe>
+     <hr></hr> 
+    <video width="320" height="240" controls>
+      <source scr="https://www.youtube.com/watch?v=LNSqKB_SS9Y&t=1s" autoplay muted>
+      <source src="movie.ogg" type="video/ogg">
+      Your browser does not support the video tag.  
+    </video>
+    <hr></hr> 
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png" alt="Logo de Google" width="300" height="100">
+    <hr></hr>
+</body>
+</html>
