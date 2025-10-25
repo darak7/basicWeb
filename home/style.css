@@ -1,0 +1,321 @@
+/* Reset básico con CSS3 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilo para el fondo de la página */
+body {
+    background-color: rgb(210, 216, 126);
+}
+
+/* Estilos específicos para las clases del ejercicio */
+.large-text {
+    font-size: 24px;
+}
+
+.blue-text {
+    color: blue;
+}
+
+.courier-font {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.yellow-background {
+    background-color: yellow;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.bold-text {
+    font-weight: bold;
+}
+
+.italic-text {
+    font-style: italic;
+}
+
+.underline-text {
+    text-decoration: underline;
+}
+
+.uppercase-text {
+    text-transform: uppercase;
+}
+
+.letter-spacing-text {
+    letter-spacing: 3px;
+}
+
+.double-line-height {
+    line-height: 2;
+}
+
+.bordered-text {
+    border: 2px solid black;
+    padding: 10px;
+}
+
+.shadowed-text {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.semi-transparent-text {
+    opacity: 0.5;
+}
+
+.rotated-text {
+    transform: rotate(-5deg);
+    display: inline-block;
+}
+
+.grayscale-text {
+    color: #666;
+}
+
+.text-shadowed {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.gradient-text {
+    background: linear-gradient(45deg, #ff0000, #00ff00);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.animated-color-text {
+    animation: colorChange 3s infinite;
+}
+
+.interactive-text {
+    cursor: pointer;
+    color: #007bff;
+    transition: color 0.3s;
+}
+
+.interactive-text:hover {
+    color: #0056b3;
+}
+
+@keyframes colorChange {
+    0% { color: red; }
+    50% { color: blue; }
+    100% { color: red; }
+}
+
+/* Variables globales */
+:root {
+    --color-primario: #007bff;
+    --color-secundario: #6c757d;
+    --color-texto: #ffffff;
+    --color-fondo: #000000;
+    --espaciado-base: 1rem;
+    --fuente-principal: 'Segoe UI','Arial', sans-serif;
+}
+
+/* Estilos base */
+body {
+    font-family: var(--fuente-principal);
+    line-height: 1.6;
+    color: var(--color-texto);
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: var(--espaciado-base);
+    font-weight: bold;
+}
+
+p {
+    margin-bottom: var(--espaciado-base);
+}
+
+/* Enlaces */
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Layout y contenedores */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--espaciado-base);
+}
+
+/* Componentes */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 45px 35px;
+    font-size: 45px; 
+    background-color: #d3d0d0; 
+    color: #000000; 
+    border: 2px solid #0c0c0c; 
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    background-color: #fbfbfb;
+    opacity: 1;
+}
+
+.btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+#btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 3rem;
+    font-size: 1rem; 
+    background-color: #4039ad;
+    color: #555555; 
+    border: 2px solid #080808; 
+    border-radius: 0px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+}
+
+#btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    background-color: #fbfbfb;
+    opacity: 1;
+}
+
+#btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.card {
+    background-color: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: var(--espaciado-base);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: var(--espaciado-base);
+}
+
+.card-header {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.card-body {
+    font-size: 1rem;
+    color: var(--color-texto);
+}
+
+.card-footer {
+    font-size: 0.875rem;
+    color: var(--color-secundario);
+    margin-top: 0.5rem;
+}
+
+.checkbox,
+input.checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0.75rem; 
+    font-size: 1rem;
+    background-color: #30e0ab;
+    color: #fcf9f9;
+    border: 2px solid #1b2904;
+    border-radius: 0px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(109, 131, 104, 0.08);
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+    box-sizing: border-box; 
+}
+
+
+input.checkbox {
+    width: 20ch; 
+}
+
+.checkbox:hover,
+input.checkbox:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+    background-color: #e9e9e9; 
+}
+
+.checkbox:active,
+input.checkbox:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.checkbox-label {
+    font-size: 1rem;
+    color: var(--color-texto);
+}
+
+.checkbox-label:hover {
+    color: var(--color-primario);
+}
+
+.checkbox-placeholder {
+    color: #202c94;
+}
+
+input.checkbox:focus,
+input.checkbox:not(:placeholder-shown) {
+    background-color: #e9e9e9;
+    color: #000000;
+    outline: none;
+}
+
+
+/* Formularios */
+input, textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: var(--espaciado-base);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Utilidades */
+.text-center {
+    text-align: center;
+}
+
+.mt-1 { margin-top: var(--espaciado-base); }
+.mb-1 { margin-bottom: var(--espaciado-base); }
+.ml-1 { margin-left: var(--espaciado-base); }
+.mr-1 { margin-right: var(--espaciado-base); }
+
+/* Media queries */
+@media (max-width: 768px) {
+    :root {
+        --espaciado-base: 0.8rem;
+    }
+    
+    .container {
+        padding: 0 calc(var(--espaciado-base) * 2);
+    }
+}
