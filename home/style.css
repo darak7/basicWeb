@@ -7,7 +7,7 @@
 
 /* Estilo para el fondo de la página */
 body {
-    background-color: rgb(210, 216, 126);
+    background-color: rgb(245, 245, 245);
 }
 
 /* Estilos específicos para las clases del ejercicio */
@@ -319,3 +319,4 @@ input, textarea {
         padding: 0 calc(var(--espaciado-base) * 2);
     }
 }
+
