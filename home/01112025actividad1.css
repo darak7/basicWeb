@@ -1,0 +1,78 @@
+/* Fondo con degradado azul */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #0381ff, #d4f6ff);
+    height: 100vh;
+    /*height: 1250px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Contenedor del formulario */
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Caja blanca centrada */
+.login-box {
+    background-color: white;
+    padding: 40px 50px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Títulos de los campos */
+.login-box h2 {
+    font-size: 18px;
+    color: #0073e6;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+/* Campos de texto */
+.login-box input {
+    width: 220px;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    text-align: center;
+    outline: none;
+    font-size: 14px;
+}
+
+/* Botón principal */
+.login-box button {
+    background-color: #005ce6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-box button:hover {
+    background-color: #00b30f;
+}
+
+/* Enlace de registro */
+.register-link {
+    display: block;
+    margin-top: 15px;
+    color: black;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* Enlace de registro transición verde */
+.register-link:hover {
+    text-decoration: underline;
+}

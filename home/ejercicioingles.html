@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Arrastra las palabras - The 4 Ps Pre-Reading</title>
+  <style>
+    :root{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;}
+    body{margin:0;padding:24px;background:#f6f7fb;color:#0f172a}
+    .container{max-width:1000px;margin:0 auto;background:#fff;padding:20px;border-radius:10px;box-shadow:0 6px 22px rgba(15,23,42,0.08)}
+    h1{font-size:20px;margin:0 0 12px}
+    p.lead{margin:6px 0 18px;color:#334155}
+    .layout{display:grid;grid-template-columns:320px 1fr;gap:20px}
+
+    /* bank */
+    .bank{background:#f1f5f9;padding:12px;border-radius:8px;min-height:220px}
+    .word{display:inline-block;background:#0ea5a4;color:#fff;padding:8px 12px;margin:6px;border-radius:6px;cursor:grab;user-select:none}
+    .word[draggable="false"]{opacity:0.6;cursor:default}
+
+    /* card */
+    .card{padding:14px}
+    .sentence{margin:10px 0;line-height:1.6}
+    .drop{display:inline-block;min-width:110px;border-bottom:2px dashed #94a3b8;padding:4px 8px;margin:0 6px;background:transparent;border-radius:4px}
+    .drop.hover{background:#e2f0ff}
+    .drop.filled{border-bottom-style:solid}
+    .controls{margin-top:16px}
+    button{background:#0369a1;color:#fff;border:0;padding:10px 14px;border-radius:8px;cursor:pointer;margin-right:8px}
+    button.secondary{background:#94a3b8}
+    .result{margin-top:12px;font-weight:600}
+    @media(max-width:720px){.layout{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Arrastra las palabras / Drag & Drop — The 4 Ps</h1>
+    <p class="lead">Arrastra cada palabra del banco a la línea correcta. Luego haz clic en "Comprobar" para validar.</p>
+
+    <div class="layout">
+      <div>
+        <div class="bank" id="bank" aria-label="Banco de palabras">
+          <!-- words inserted by script -->
+        </div>
+        <div style="margin-top:12px;font-size:13px;color:#475569">Palabras: arrastra y suelta. Para devolver una palabra al banco, arrástrala allí.</div>
+      </div>
+
+      <div class="card">
+        <div class="sentence">The 4 Ps pre-reading <span class="drop" data-answer="strategies" tabindex="0"></span>: <span class="drop" data-answer="purpose" tabindex="0"></span>, <span class="drop" data-answer="preview" tabindex="0"></span>, <span class="drop" data-answer="prior knowledge" tabindex="0"></span>, and <span class="drop" data-answer="predict" tabindex="0"></span> helps readers engage with a text more <span class="drop" data-answer="effectively" tabindex="0"></span>.</div>
+
+        <div class="sentence">(<strong>6</strong>) <span class="drop" data-answer="purpose" tabindex="0"></span>: Identify why you're reading the text and what you hope to learn from it.</div>
+
+        <div class="sentence">(<strong>7</strong>) <span class="drop" data-answer="preview" tabindex="0"></span>: Skim through headings, <span class="drop" data-answer="subheading" tabindex="0"></span>, and any <span class="drop" data-answer="images" tabindex="0"></span> to get a general idea of the content.</div>
+
+        <div class="sentence">(<strong>10</strong>) <span class="drop" data-answer="prior knowledge" tabindex="0"></span>: Think about what you already know about the <span class="drop" data-answer="topic" tabindex="0"></span> to connect it with new <span class="drop" data-answer="information" tabindex="0"></span>.</div>
+
+        <div class="sentence">(<strong>13</strong>) <span class="drop" data-answer="predict" tabindex="0"></span>: Based on the preview, make <span class="drop" data-answer="predictions" tabindex="0"></span> about what the text will cover or what will happen <span class="drop" data-answer="next" tabindex="0"></span>.</div>
+
+        <div class="controls">
+          <button id="check">Comprobar / Check</button>
+          <button id="reset" class="secondary">Reiniciar / Reset</button>
+          <span id="score" class="result" aria-live="polite"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Answers bank (can be localized)
+    const WORDS = [
+      'strategies','purpose','preview','prior knowledge','predict','effectively',
+      'subheading','images','topic','information','predictions','next'
+    ];
+
+    const bank = document.getElementById('bank');
+    const drops = Array.from(document.querySelectorAll('.drop'));
+
+    // Render words into bank
+    function renderBank(){
+      bank.innerHTML = '';
+      WORDS.forEach(w=>{
+        const el = document.createElement('div');
+        el.className = 'word';
+        el.draggable = true;
+        el.textContent = w;
+        el.setAttribute('data-word', w);
+        el.addEventListener('dragstart', onDragStart);
+        bank.appendChild(el);
+      });
+    }
+
+    // Drag & Drop handlers
+    let dragged = null;
+    function onDragStart(e){
+      dragged = e.target;
+      e.dataTransfer.setData('text/plain', e.target.getAttribute('data-word'));
+      e.dataTransfer.effectAllowed = 'move';
+      setTimeout(()=> e.target.classList.add('dragging'), 0);
+    }
+
+    function onDragOver(e){
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      this.classList.add('hover');
+    }
+    function onDragLeave(e){ this.classList.remove('hover'); }
+
+    function onDrop(e){
+      e.preventDefault();
+      this.classList.remove('hover');
+      const word = e.dataTransfer.getData('text/plain');
+      if(!word) return;
+
+      // if dropping onto bank, create new draggable if not exists
+      if(this.id === 'bank'){
+        // if word already in bank (do nothing)
+        const exists = Array.from(bank.querySelectorAll('.word')).some(n=>n.dataset.word===word);
+        if(!exists){
+          const el = createWordElement(word);
+          bank.appendChild(el);
+        }
+        // remove from any filled drop that had it
+        drops.forEach(d=>{
+          if(d.dataset.filled===word){ d.dataset.filled=''; d.classList.remove('filled'); d.textContent=''; }
+        });
+        return;
+      }
+
+      // Dropping onto a .drop zone
+      const zone = this;
+      const expected = zone.dataset.answer;
+
+      // If drop already has a word, return it to bank first
+      if(zone.dataset.filled){
+        // create a new word in bank for previous value
+        const prev = zone.dataset.filled;
+        const el = createWordElement(prev);
+        bank.appendChild(el);
+      }
+
+      // remove dragged element from its current parent (bank or previous drop)
+      removeDraggedInstance(word);
+
+      // place word in drop visually
+      zone.textContent = word;
+      zone.dataset.filled = word;
+      zone.classList.add('filled');
+    }
+
+    function createWordElement(word){
+      const el = document.createElement('div');
+      el.className = 'word';
+      el.draggable = true;
+      el.textContent = word;
+      el.dataset.word = word;
+      el.addEventListener('dragstart', onDragStart);
+      return el;
+    }
+
+    function removeDraggedInstance(word){
+      // remove first matching element from bank
+      const bankWord = Array.from(bank.querySelectorAll('.word')).find(n=>n.dataset.word===word);
+      if(bankWord) bankWord.remove();
+      // remove from any drop that had it (to avoid duplicates)
+      drops.forEach(d=>{
+        if(d.dataset.filled===word) { d.dataset.filled=''; d.textContent=''; d.classList.remove('filled'); }
+      });
+    }
+
+    // Setup drop listeners
+    function setupDrops(){
+      // bank is a drop target too
+      bank.addEventListener('dragover', onDragOver);
+      bank.addEventListener('dragleave', onDragLeave);
+      bank.addEventListener('drop', onDrop);
+
+      drops.forEach(d=>{
+        d.addEventListener('dragover', onDragOver);
+        d.addEventListener('dragleave', onDragLeave);
+        d.addEventListener('drop', onDrop);
+
+        // allow keyboard focus + keyboard interaction (Enter to clear)
+        d.addEventListener('keydown', (e)=>{
+          if(e.key==='Backspace' || e.key==='Delete'){
+            if(d.dataset.filled){
+              const prev = d.dataset.filled;
+              d.dataset.filled = '';
+              d.textContent = '';
+              d.classList.remove('filled');
+              // return to bank
+              const el = createWordElement(prev);
+              bank.appendChild(el);
+            }
+          }
+        });
+      });
+    }
+
+    // Check answers
+    document.getElementById('check').addEventListener('click', ()=>{
+      let correct = 0;
+      const total = drops.length;
+      drops.forEach(d=>{
+        const expected = d.dataset.answer;
+        const given = d.dataset.filled || '';
+        if(given && given.toLowerCase() === expected.toLowerCase()){
+          d.style.background = '#dcfce7'; // success
+          correct++;
+        } else {
+          d.style.background = '#fee2e2'; // wrong
+        }
+      });
+      const score = document.getElementById('score');
+      score.textContent = `Aciertos: ${correct} / ${total}`;
+    });
+
+    // Reset
+    document.getElementById('reset').addEventListener('click', ()=>{
+      // clear drops
+      drops.forEach(d=>{ d.dataset.filled=''; d.textContent=''; d.classList.remove('filled'); d.style.background='transparent'; });
+      // refill bank (avoid duplicates)
+      renderBank();
+      document.getElementById('score').textContent = '';
+    });
+
+    // Utilities for cleaning up when dragging ends
+    document.addEventListener('dragend', (e)=>{ if(e.target) e.target.classList.remove('dragging'); dragged=null; });
+
+    // If dragged word is dropped outside, we don't want duplicates. Listen to document drop to return it to bank
+    document.addEventListener('drop', (e)=>{ e.preventDefault(); });
+    document.addEventListener('dragover', (e)=>{ e.preventDefault(); });
+
+    // initialize
+    renderBank();
+    setupDrops();
+  </script>
+</body>
+</html>
